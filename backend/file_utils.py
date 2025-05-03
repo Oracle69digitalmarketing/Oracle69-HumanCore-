@@ -1,0 +1,17 @@
+import docx
+import PyPDF2
+
+def parse_pdf(file_path):
+    with open(file_path, 'rb') as file:
+        reader = PyPDF2.PdfReader(file)
+        text = ""
+        for page in reader.pages:
+            text += page.extract_text()
+    return text
+
+def parse_docx(file_path):
+    doc = docx.Document(file_path)
+    text = ""
+    for para in doc.paragraphs:
+        text += para.text
+    return text
